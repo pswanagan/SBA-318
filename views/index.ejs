@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Express Views</title>
+</head>
+<body>
+  <h1><%= message %></h1>
+
+
+  <form action="/api/data" method="POST">
+    <label for="data">Data:</label>
+    <input type="text" id="data" name="data">
+    <button type="submit">Submit</button>
+  </form>
+
+</body>
+</html>
