@@ -1,19 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Express Views</title>
+    <title>Animals</title>
 </head>
 <body>
-  <h1><%= message %></h1>
-
-
-  <form action="/api/data" method="POST">
-    <label for="data">Data:</label>
-    <input type="text" id="data" name="data">
-    <button type="submit">Submit</button>
-  </form>
-
+    <h1>List of Animals</h1>
+    <ul>
+        <% animals.forEach(function(animal) { %>
+            <li><%= animal.name %> - <%= animal.sci_Name %> (<%= animal.country %>)</li>
+        <% }); %>
+    </ul>
 </body>
 </html>
