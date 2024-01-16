@@ -6,13 +6,13 @@ const keeperRoutes = require('./routes/keepers');
 const assignmentRoutes = require('./routes/assignments');
 
 const app = express();
-const bodyParser = require('body-parser');
+
 const port = 3000; // Choose a port
 
 // Middleware for parsing JSON and URL-encoded data
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+
 // Set the template engine to EJS
 app.set('view engine', 'ejs');
 
