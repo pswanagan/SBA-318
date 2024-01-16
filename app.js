@@ -12,28 +12,50 @@ app.set('view engine', 'ejs');
 // Serve static files from a "public" directory
 app.use(express.static('public'));
 
-// Define your API routes
-app.get('/api/data', (req, res) => {
-  // Your RESTful API logic here
-});
-
-// Define a route for rendering views
-app.get('/views', (req, res) => {
-  res.render('index', { message: 'Hello from Express!' });
-});
-
-// Custom middleware function
-const customMiddleware = (req, res, next) => {
-    // Your middleware logic here
-    console.log('Custom Middleware executed');
+// Custom Middleware #1: Logging Middleware
+const loggerMiddleware = (req, res, next) => {
+    console.log(`Request received: ${req.method} ${req.url}`);
     next();
-  };
-  
-  // Use the custom middleware in your application
-  app.use(customMiddleware);
+};
+
+app.use(loggerMiddleware);
+
+// Custom Middleware #2: Authentication Middleware (Placeholder)
+const authMiddleware = (req, res, next) => {
+    // Placeholder for authentication logic
+    // If authenticated, call next(), else respond with an error
+    next();
+};
+
+app.use(authMiddleware);
+
+// Define routes for different data categories: Users, Posts, Comments
+
+// Users route
+app.get('/api/users', (req, res) => {
+    // Logic to handle user data
+    res.send('Users data');
+});
+
+// Posts route
+app.get('/api/posts', (req, res) => {
+    // Logic to handle post data
+    res.send('Posts data');
+});
+
+// Comments route
+app.get('/api/comments', (req, res) => {
+    // Logic to handle comments data
+    res.send('Comments data');
+});
+
+// Error-handling middleware
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
+});
 
 // Start the server
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+    console.log(`Server is running on port ${port}`);
 });
-
