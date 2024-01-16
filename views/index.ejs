@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Animals</title>
+    <link rel="stylesheet" href="/public/style.css">
 </head>
 <body>
     <h1>List of Animals</h1>
@@ -10,5 +11,19 @@
             <li><%= animal.name %> - <%= animal.sci_Name %> (<%= animal.country %>)</li>
         <% }); %>
     </ul>
+
+    <h2>Add a New Keeper</h2>
+    <form action="/api/keepers" method="post">
+        <label for="first">First Name:</label>
+        <input type="text" id="first" name="first"><br><br>
+
+        <label for="last">Last Name:</label>
+        <input type="text" id="last" name="last"><br><br>
+
+        <label for="gender">Gender:</label>
+        <input type="text" id="gender" name="gender"><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
 </body>
 </html>
