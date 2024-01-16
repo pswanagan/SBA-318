@@ -7,6 +7,17 @@ router.get('/', (req, res) => {{
     res.json(keepers);
 }});
 
+router.get('/:id', (req, res) => {
+    const keeperId = parseInt(req.params.id);
+    const keeper = keepers.find(k => k.id === keeperId);
+
+    if (!keeper) {
+        return res.status(404).send('Keeper not found');
+    }
+
+    res.json(keeper);
+});
+
 // Adding a POST route for 'keepers' to allow adding new keeper entries
 router.post('/', (req, res) => {
     const newKeeper = req.body;

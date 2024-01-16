@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: false }));
 app.set('view engine', 'ejs');
 
 // Route to render a view with a list of all animals using EJS
-app.get('/animals', (req, res) => {
+app.get('/animals/view', (req, res) => {
     res.render('animals', { animals });
 });
 

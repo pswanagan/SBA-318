@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f8f8f8;
+    background-color: seagreen;
     margin: 0;
     padding: 0;
 }
@@ -16,9 +16,10 @@ ul {
 }
 
 li {
-    background-color: #fff;
+    background-color: seagreen;
     border: 1px solid #ddd;
     margin-bottom: 5px;
     padding: 10px;
     border-radius: 4px;
+   
 }
