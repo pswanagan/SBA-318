@@ -18,23 +18,41 @@ router.get('/:id', (req, res) => {
     res.json(animal);
 });
 
-// Updating the 'animals' route to allow filtering through query parameters
-router.get('/', (req, res) => {
-    let filteredAnimals = [...animals];
-
-    // Filter by country if provided
-    if (req.query.country) {
-        filteredAnimals = filteredAnimals.filter(animal => animal.country === req.query.country);
-    }
-
-    // Filter by name if provided
-    if (req.query.name) {
-        filteredAnimals = filteredAnimals.filter(animal => animal.name.toLowerCase().includes(req.query.name.toLowerCase()));
-    }
-
-    res.json(filteredAnimals);
+router.post('/', (req, res) => {
+    const newAnimal = req.body; // Get new animal data from request body
+    animals.push(newAnimal);
+    res.status(201).send('New animal added');
 });
 
+router.patch('/animals/:id', (req, res) => {
+    const { id } = req.params;
+    const updatedData = req.body; // Get updated data from request body
+    // Find the keeper with the given ID
+    let animalIndex = animals.findIndex(a => a.id === animalId);
+    if (animalIndex === -1) {
+        return res.status(404).send('Animal not found');
+    }
 
+    // Update the keeper's information
+    animals[animalIndex] = { ...animals[animalIndex], ...updatedData};
+    res.json(animals[animalIndex]);
+    res.send('Animal updated');
+});
+
+router.delete('/animals/:id', (req, res) => {
+    const { id } = req.params;
+   
+    const keeperId = parseInt(req.params.id);
+
+    // Find the index of the keeper with the given ID
+    const keeperIndex = keepers.findIndex(k => k.id === keeperId);
+    if (keeperIndex === -1) {
+        return res.status(404).send('Keeper not found');
+    }
+
+    // Remove the keeper from the array
+    keepers.splice(keeperIndex, 1);
+    res.send('Animal deleted');
+});
 
 module.exports = router;

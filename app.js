@@ -1,5 +1,7 @@
 const express = require('express');
 const animals = require('./data/animals');
+const keepers = require('./data/keepers');
+const assignments = require('./data/assignments');
 
 const animalRoutes = require('./routes/animals');
 const keeperRoutes = require('./routes/keepers');
@@ -16,14 +18,30 @@ app.use(express.urlencoded({ extended: false }));
 // Set the template engine to EJS
 app.set('view engine', 'ejs');
 
-// Route to render a view with a list of all animals using EJS
+function joinAnimalKeeperData(animals, keepers, assignments) {
+    const keepersDict = keepers.reduce((dict, keeper) => {
+        dict[keeper.id] = keeper;
+        return dict;
+    }, {});
+
+    return assignments.map(assignment => {
+        const animal = animals.find(animal => animal.name === assignment.name);
+        const keeper = keepersDict[assignment.keeper.id];
+        return {
+            animal: animal || {}, // Fallback to an empty object if not found
+            keeper: keeper || {}  // Fallback to an empty object if not found
+        };
+    });
+}
+// Route handler for displaying animals with their keepers
 app.get('/animals/view', (req, res) => {
-    res.render('animals', { animals });
+    const animalsWithKeepers = joinAnimalKeeperData(animals, keepers, assignments);
+    res.render('animals', { animalsWithKeepers });
 });
 
-app.use('/api/animals', animalRoutes);
-app.use('/api/keepers', keeperRoutes);
-app.use('/api/assignments', assignmentRoutes);
+app.use('/animals', animalRoutes);
+app.use('/keepers', keeperRoutes);
+app.use('/assignments', assignmentRoutes);
 // Serve static files from a "public" directory
 app.use(express.static('public'));
 
