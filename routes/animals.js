@@ -40,18 +40,18 @@ router.patch('/animals/:id', (req, res) => {
 });
 
 router.delete('/animals/:id', (req, res) => {
-    const { id } = req.params;
    
-    const keeperId = parseInt(req.params.id);
+   
+    const animalId = parseInt(req.params.id);
 
     // Find the index of the keeper with the given ID
-    const keeperIndex = keepers.findIndex(k => k.id === keeperId);
-    if (keeperIndex === -1) {
-        return res.status(404).send('Keeper not found');
+    const animalIndex = keepers.findIndex(a => a.id === animalId);
+    if (animalIndex === -1) {
+        return res.status(404).send('Animal not found');
     }
 
     // Remove the keeper from the array
-    keepers.splice(keeperIndex, 1);
+    animals.splice(keeperIndex, 1);
     res.send('Animal deleted');
 });
 

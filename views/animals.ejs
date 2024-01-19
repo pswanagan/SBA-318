@@ -25,16 +25,13 @@
         <% }); %>
     </table>
 
-    <h2>Add a New Keeper</h2>
-    <form action="/keepers" method="post">
-        <label for="first">First Name:</label>
-        <input type="text" id="first" name="first"><br><br>
+    <h2>Add a New Animal</h2>
+    <form action="/animals" method="post">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name"><br><br>
 
-        <label for="last">Last Name:</label>
-        <input type="text" id="last" name="last"><br><br>
-
-        <label for="gender">Gender:</label>
-        <input type="text" id="gender" name="gender"><br><br>
+        <label for="sci_Name">Scientific Name:</label>
+        <input type="text" id="sci_Name" name="sci_Name"><br><br>
 
         <input type="submit" value="Submit">
     </form>
