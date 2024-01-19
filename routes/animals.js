@@ -19,13 +19,20 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    const newAnimal = req.body; // Get new animal data from request body
+    const newAnimal = {
+        id: animals.length + 1,
+        name: req.body.name,
+        sci_Name: req.body.sci_Name,
+        country: req.body.country
+    }
+    
+    console.log(newAnimal);
     animals.push(newAnimal);
     res.status(201).send('New animal added');
 });
 
-router.patch('/animals/:id', (req, res) => {
-    const { id } = req.params;
+router.patch('/:id', (req, res) => {
+    const animalId = parseInt(req.params.id);
     const updatedData = req.body; // Get updated data from request body
     // Find the keeper with the given ID
     let animalIndex = animals.findIndex(a => a.id === animalId);
@@ -39,20 +46,21 @@ router.patch('/animals/:id', (req, res) => {
     res.send('Animal updated');
 });
 
-router.delete('/animals/:id', (req, res) => {
-   
-   
-    const animalId = parseInt(req.params.id);
+router.delete('/:id', (req, res) => {
+    const animalId = parseInt(req.params.id); // Parse the ID from the URL
+    console.log(`Looking for animal with ID: ${animalId}`);
 
-    // Find the index of the keeper with the given ID
-    const animalIndex = keepers.findIndex(a => a.id === animalId);
-    if (animalIndex === -1) {
-        return res.status(404).send('Animal not found');
+    const animalIndex = animals.findIndex(a => {
+        console.log(`Checking animal with ID: ${a.id}`);
+        return a.id === animalId;
+    }); // Find the animal
+
+    if (animalIndex !== -1) {
+        animals.splice(animalIndex, 1); // Remove the animal
+        res.send('Animal deleted');
+    } else {
+        res.status(404).send('Animal not found'); // Animal not found
     }
-
-    // Remove the keeper from the array
-    animals.splice(keeperIndex, 1);
-    res.send('Animal deleted');
 });
 
 module.exports = router;

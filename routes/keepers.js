@@ -20,7 +20,13 @@ router.get('/:id', (req, res) => {
 
 // Adding a POST route for 'keepers' to allow adding new keeper entries
 router.post('/', (req, res) => {
-    const newKeeper = req.body;
+    const newKeeper = {
+        id: keepers.length + 1,
+        first: req.body.first,
+        last: req.body.last,
+        gender: req.body.gender
+    };
+    
     //Adding the new keeper to the array.
     keepers.push(newKeeper);
     res.status(201).json(newKeeper);
@@ -54,7 +60,7 @@ router.delete('/:id', (req, res) => {
 
     // Remove the keeper from the array
     keepers.splice(keeperIndex, 1);
-    res.status(204).send();  // 204 No Content
+    res.status(204).send('Keeper was deleted');  // 204 No Content
 });
 
 

@@ -6,20 +6,22 @@ body {
 }
 
 h1 {
-    color: #333;
+    color: black;
     text-align: center;
 }
 
-ul {
-    list-style: none;
-    padding: 0;
+table, th, tr, td {
+    border: 1px solid;
 }
 
-li {
-    background-color: seagreen;
-    border: 1px solid #ddd;
-    margin-bottom: 5px;
-    padding: 10px;
-    border-radius: 4px;
-   
+table {
+    margin-left: 25%;
+}
+
+form {
+    margin-left: 40%;
+}
+
+h2 {
+    margin-left: 40%;
 }

@@ -11,7 +11,7 @@ router.get('/', (req, res) => {{
 // Adding route parameter for retrieving a specific assignment by ID
 router.get('/:id', (req, res) => {
     const assignmentId = parseInt(req.params.id);
-    const assignment = assignments.find(a => a.id === assignmentId);
+    const assignment = assignments.find(a => a.id == assignmentId);
 
     if (!assignment) {
         return res.status(404).send('Assignment not found');

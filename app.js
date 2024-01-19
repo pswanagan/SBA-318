@@ -48,19 +48,15 @@ app.use(express.static('public'));
 // Custom Middleware #1: Logging Middleware
 const loggerMiddleware = (req, res, next) => {
     console.log(`Request received: ${req.method} ${req.url}`);
+    
     next();
 };
 
 app.use(loggerMiddleware);
 
-// Custom Middleware #2: Authentication Middleware (Placeholder)
-const authMiddleware = (req, res, next) => {
-    // Placeholder for authentication logic
-    // If authenticated, call next(), else respond with an error
-    next();
-};
 
-app.use(authMiddleware);
+
+
 
 
 
